@@ -1,5 +1,6 @@
 package com.hcl.portfolio;
 
+import com.hcl.portfolio.dto.PortfolioDto;
 import com.hcl.portfolio.model.Portfolio;
 import com.hcl.portfolio.repository.PortfolioRepository;
 import com.hcl.portfolio.service.PortfolioService;
@@ -31,9 +32,9 @@ class PortfolioApplicationTests {
 		Portfolio expectedPortfolio = new Portfolio(1,"John Doe", "1001", portfolioValue, 23.4, "Safe");
 
 		when(portfolioRepository.findById(anyInt())).thenReturn(Optional.of(expectedPortfolio));
-		Portfolio actualPortfolio = portfolioService.getPortfolio(1);
+		PortfolioDto actualPortfolio = portfolioService.getPortfolio(1);
 		// Assert
-		assertEquals(expectedPortfolio, actualPortfolio);
+		assertEquals(expectedPortfolio.getCustomerName(), actualPortfolio.getCustomerName());
 	}
 
 }

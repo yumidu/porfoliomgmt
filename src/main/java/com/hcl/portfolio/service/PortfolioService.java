@@ -1,7 +1,7 @@
 package com.hcl.portfolio.service;
 
-import com.hcl.portfolio.model.Portfolio;
+import com.hcl.portfolio.dto.PortfolioDto;
 
 public interface PortfolioService {
-    Portfolio getPortfolio(int i);
+    PortfolioDto getPortfolio(int i);
 }
