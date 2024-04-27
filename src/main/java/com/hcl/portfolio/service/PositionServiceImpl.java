@@ -22,7 +22,7 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public List<Position> getAllPositionsForPortfolio(int portfolioId) {
-        List<Position> positionsForPortfolio = positionRepository.findByPositionId(portfolioId);
+        List<Position> positionsForPortfolio = positionRepository.findByPortoflioId(portfolioId);
         if(positionsForPortfolio != null && !positionsForPortfolio.isEmpty()){
             return positionsForPortfolio;
         }
@@ -42,5 +42,27 @@ public class PositionServiceImpl implements PositionService {
 
         Position savedPosition = positionRepository.save(position);
         return savedPosition;
+    }
+
+    @Override
+    public List<Position> getAllPositionsForInstrument(Long instrumentId) {
+        List<Position> positionsForInstrument = positionRepository.findByInstrumentId(instrumentId);
+        if(positionsForInstrument != null && !positionsForInstrument.isEmpty()){
+            return positionsForInstrument;
+        }
+        else{
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public List<Position> getAllPositionsForInstrumentAndPortfolio(Long instrumentId, int portfolio_id) {
+        List<Position> positionsForPortfolioAndInstrument = positionRepository.findByInstrumentIdAndPortfolioId(instrumentId, portfolio_id);
+        if(positionsForPortfolioAndInstrument != null && !positionsForPortfolioAndInstrument.isEmpty()){
+            return positionsForPortfolioAndInstrument;
+        }
+        else{
+            return new ArrayList<>();
+        }
     }
 }

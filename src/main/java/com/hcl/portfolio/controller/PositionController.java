@@ -28,6 +28,17 @@ public class PositionController {
         return new ResponseEntity<>(positionService.getAllPositionsForPortfolio(portfolio_id), HttpStatus.OK);
     }
 
+    @GetMapping("/get-positions-by-instrument")
+    ResponseEntity<List<Position>> getPositionsPerInstrument(@RequestParam("instrument_id") Long instrument_id){
+        return new ResponseEntity<>(positionService.getAllPositionsForInstrument(instrument_id), HttpStatus.OK);
+    }
+
+    @GetMapping("/get-positions-by-instrument-and-portfolio")
+    ResponseEntity<List<Position>> getPositionsPerInstrument(@RequestParam("portfolio_id") int portfolio_id,
+                                                             @RequestParam("instrument_id") Long instrument_id){
+        return new ResponseEntity<>(positionService.getAllPositionsForInstrumentAndPortfolio(instrument_id, portfolio_id), HttpStatus.OK);
+    }
+
     @PostMapping("/create-position")
     ResponseEntity<Position> createPosition(@RequestBody CreatePositionRequestEntity createPositionRequestEntity){
         return new ResponseEntity<>(positionService.createPosition(createPositionRequestEntity),HttpStatus.OK);

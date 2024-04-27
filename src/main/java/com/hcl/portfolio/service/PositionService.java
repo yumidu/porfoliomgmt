@@ -16,6 +16,9 @@ public interface PositionService {
 
     List<Position> getAllPositionsForPortfolio(int portfolioId);
     Position createPosition(CreatePositionRequestEntity createPositionRequestEntity);
+    List<Position> getAllPositionsForInstrument(Long instrumentId);
+
+    List<Position> getAllPositionsForInstrumentAndPortfolio(Long instrumentId, int portfolio_id);
 
 
 }

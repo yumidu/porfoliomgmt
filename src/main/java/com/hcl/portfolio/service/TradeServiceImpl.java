@@ -1,5 +1,6 @@
 package com.hcl.portfolio.service;
 
+import com.hcl.portfolio.model.Position;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,12 +12,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class TradeServiceImpl implements TradeService {
     @Override
-    public String sellStock(int position_id, int quantity) {
-        return null;
-    }
+    public String tradeStock(int position_id, int tradeQuantity, String tradeType) {
+        if(tradeType.equals("sell")){
 
-    @Override
-    public String buyStock(int position_id, int quantity) {
+        }
+        else if(tradeType.equals("buy")){
+
+        }
         return null;
     }
 }
