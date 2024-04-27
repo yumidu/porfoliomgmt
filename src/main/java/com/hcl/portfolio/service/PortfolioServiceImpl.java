@@ -4,15 +4,18 @@ import com.hcl.portfolio.dto.PortfolioDto;
 import com.hcl.portfolio.exception.PortfolioException;
 import com.hcl.portfolio.model.Portfolio;
 import com.hcl.portfolio.repository.PortfolioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class PortfolioServiceImpl implements PortfolioService{
 
     private final PortfolioRepository portfolioRepository;
+    private static final Logger logger = LoggerFactory.getLogger(PortfolioServiceImpl.class);
 
     public PortfolioServiceImpl(PortfolioRepository portfolioRepository) {
         this.portfolioRepository = portfolioRepository;
@@ -20,6 +23,8 @@ public class PortfolioServiceImpl implements PortfolioService{
 
     @Override
     public PortfolioDto getPortfolio(int i) throws PortfolioException{
+        String methodNameForLogs = new Object() {}.getClass().getEnclosingMethod().getName();
+        logger.info("Get Portfolio Start in {}: {}", methodNameForLogs, i);
 
         PortfolioDto portfolioDto = null;
 
@@ -31,8 +36,10 @@ public class PortfolioServiceImpl implements PortfolioService{
             }
 
         }catch(Exception e){
+            logger.info("Error in " + methodNameForLogs + e.getMessage());
             throw new PortfolioException(e.getMessage());
         }
+        logger.info("Get Portfolio End in {}: {}", methodNameForLogs, i);
         return portfolioDto;
     }
 
