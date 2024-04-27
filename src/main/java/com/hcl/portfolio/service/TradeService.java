@@ -1,5 +1,6 @@
 package com.hcl.portfolio.service;
 
+import com.hcl.portfolio.model.requestentities.TradeRequestEntity;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface TradeService {
-    String sellStock(int position_id, int quantity);
-    String buyStock(int position_id, int quantity);
+    String tradeStock(TradeRequestEntity tradeRequestEntity);
 
 }
