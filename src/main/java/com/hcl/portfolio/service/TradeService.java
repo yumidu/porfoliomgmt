@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface TradeService {
-    String sellStock(int position_id, int quantity);
-    String buyStock(int position_id, int quantity);
+    String tradeStock(int position_id, int tradeQuantity, String tradeType);
 
 }
