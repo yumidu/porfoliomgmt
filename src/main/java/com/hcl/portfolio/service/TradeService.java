@@ -1,5 +1,6 @@
 package com.hcl.portfolio.service;
 
+import com.hcl.portfolio.exceptions.TradeException;
 import com.hcl.portfolio.model.requestentities.TradeRequestEntity;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface TradeService {
-    String tradeStock(TradeRequestEntity tradeRequestEntity);
+    String tradeStock(TradeRequestEntity tradeRequestEntity) throws TradeException;
 
 }
