@@ -1,5 +1,6 @@
 package com.hcl.portfolio.service;
 
+import com.hcl.portfolio.exceptions.TradeException;
 import com.hcl.portfolio.model.Position;
 import com.hcl.portfolio.model.requestentities.TradeRequestEntity;
 import com.hcl.portfolio.repository.PositionRepository;
@@ -20,7 +21,7 @@ public class TradeServiceImpl implements TradeService {
     @Autowired
     PositionRepository positionRepository;
     @Override
-    public String tradeStock(TradeRequestEntity tradeRequestEntity) {
+    public String tradeStock(TradeRequestEntity tradeRequestEntity) throws TradeException {
         if(tradeRequestEntity.getTradeType().equals("sell")){
             Optional<Position> position = Optional.ofNullable(positionRepository.findByInstrumentIdAndPortfolioId(tradeRequestEntity.getInstrumentId(),
                     tradeRequestEntity.getPortfolioId()));
