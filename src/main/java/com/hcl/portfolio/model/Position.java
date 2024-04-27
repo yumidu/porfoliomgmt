@@ -25,7 +25,7 @@ public class Position {
     private int positionId;
     private Long instrumentId;
     private BigInteger quantity;
-    private int customerId;
+    private int portfolioId;
     private double buyingPrice;
     private double sellingPrice;
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -22,7 +23,7 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public List<Position> getAllPositionsForPortfolio(int portfolioId) {
-        List<Position> positionsForPortfolio = positionRepository.findByPortoflioId(portfolioId);
+        List<Position> positionsForPortfolio = positionRepository.findByPortfolioId(portfolioId);
         if(positionsForPortfolio != null && !positionsForPortfolio.isEmpty()){
             return positionsForPortfolio;
         }
@@ -35,7 +36,7 @@ public class PositionServiceImpl implements PositionService {
     public Position createPosition(CreatePositionRequestEntity createPositionRequestEntity) {
         Position position = new Position();
         position.setInstrumentId(createPositionRequestEntity.getInstrumentId());
-        position.setCustomerId(createPositionRequestEntity.getPortfolioId());
+        position.setPortfolioId(createPositionRequestEntity.getPortfolioId());
         position.setQuantity(createPositionRequestEntity.getQuantity());
         position.setBuyingPrice(createPositionRequestEntity.getBuyingPrice());
         position.setSellingPrice(createPositionRequestEntity.getSellingPrice());
@@ -56,13 +57,14 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public List<Position> getAllPositionsForInstrumentAndPortfolio(Long instrumentId, int portfolio_id) {
-        List<Position> positionsForPortfolioAndInstrument = positionRepository.findByInstrumentIdAndPortfolioId(instrumentId, portfolio_id);
-        if(positionsForPortfolioAndInstrument != null && !positionsForPortfolioAndInstrument.isEmpty()){
-            return positionsForPortfolioAndInstrument;
+    public Position getAllPositionsForInstrumentAndPortfolio(Long instrumentId, int portfolio_id) {
+        Optional<Position> positionsForPortfolioAndInstrument = Optional
+                .ofNullable(positionRepository.findByInstrumentIdAndPortfolioId(instrumentId, portfolio_id));
+        if(positionsForPortfolioAndInstrument.isPresent()){
+            return positionsForPortfolioAndInstrument.get();
         }
         else{
-            return new ArrayList<>();
+            return null;
         }
     }
 }
