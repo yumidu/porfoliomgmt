@@ -1,5 +1,6 @@
 package com.hcl.portfolio.service;
 
+import com.hcl.portfolio.exceptions.PositionNotFoundException;
 import com.hcl.portfolio.model.Position;
 import com.hcl.portfolio.model.requestentities.CreatePositionRequestEntity;
 import com.hcl.portfolio.repository.PositionRepository;
@@ -22,7 +23,7 @@ public class PositionServiceImpl implements PositionService {
     PositionRepository positionRepository;
 
     @Override
-    public List<Position> getAllPositionsForPortfolio(int portfolioId) {
+    public List<Position> getAllPositionsForPortfolio(int portfolioId) throws PositionNotFoundException {
         List<Position> positionsForPortfolio = positionRepository.findByPortfolioId(portfolioId);
         if(positionsForPortfolio != null && !positionsForPortfolio.isEmpty()){
             return positionsForPortfolio;
@@ -46,7 +47,7 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public List<Position> getAllPositionsForInstrument(Long instrumentId) {
+    public List<Position> getAllPositionsForInstrument(Long instrumentId) throws PositionNotFoundException {
         List<Position> positionsForInstrument = positionRepository.findByInstrumentId(instrumentId);
         if(positionsForInstrument != null && !positionsForInstrument.isEmpty()){
             return positionsForInstrument;
@@ -57,7 +58,7 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public Position getAllPositionsForInstrumentAndPortfolio(Long instrumentId, int portfolio_id) {
+    public Position getAllPositionsForInstrumentAndPortfolio(Long instrumentId, int portfolio_id) throws PositionNotFoundException {
         Optional<Position> positionsForPortfolioAndInstrument = Optional
                 .ofNullable(positionRepository.findByInstrumentIdAndPortfolioId(instrumentId, portfolio_id));
         if(positionsForPortfolioAndInstrument.isPresent()){
